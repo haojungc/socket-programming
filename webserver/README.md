@@ -3,7 +3,18 @@ A simple HTTP server that accepts HTTP1.1 GET requests.
 
 ## Features
 ### Get HTML Files
-Users can get HTML files by typing in the URL address bar on your browser. For example, you can type `localhost:3333/HelloWorld.html` to access file `HelloWorld.html`.
+You can GET HTML files by typing in the URL address bar on your browser. For example, you can type `localhost:3333/HelloWorld.html` to access file `HelloWorld.html`.
+
+## Usage
+### Compilation
+```bash
+$ make
+```
+
+### Launching Server
+```bash
+$ ./server [-static <path-to-static-directory>]
+```
 
 ## TODO
 - [x] Support 200 code
