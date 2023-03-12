@@ -124,7 +124,8 @@ int send_all(const int sock_fd, void *msg, size_t len, int flags)
     int total = 0;
     int byte_count = 0;
     while (total < len) {
-        if ((byte_count = send(sock_fd, msg + total, len - total, flags)) == -1) {
+        if ((byte_count = send(sock_fd, msg + total, len - total, flags)) ==
+            -1) {
             perror("send");
             return -1;
         }
@@ -305,12 +306,13 @@ int main(int argc, char **argv)
                             strlen(body) + 2, body);
                 }
 
-                if ((byte_count = send_all(newsock_fd, (void *) msg, strlen(msg),
-                                       0)) == -1) {
+                if ((byte_count = send_all(newsock_fd, (void *) msg,
+                                           strlen(msg), 0)) == -1) {
                     exit(1);
                 }
 
-                printf("msg len: %lu, sent %d bytes\n", strlen(msg), byte_count);
+                printf("msg len: %lu, sent %d bytes\n", strlen(msg),
+                       byte_count);
             }
 
             close(newsock_fd);
