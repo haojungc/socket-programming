@@ -305,7 +305,6 @@ int main(int argc, char **argv)
                             strlen(body) + 2, body);
                 }
 
-                /* TODO: send all */
                 if ((byte_count = send_all(newsock_fd, (void *) msg, strlen(msg),
                                        0)) == -1) {
                     exit(1);
