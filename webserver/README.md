@@ -19,6 +19,7 @@ $ ./server [-static <path-to-static-directory>]
 ## TODO
 - [x] Support 200 code
 - [x] Set static directory via command line
+- [ ] Handle HTML files that are larger than socket buffer
 - [ ] Implement HTTP client
 - [ ] Support common content types
 - [ ] Display PDF files on the browser

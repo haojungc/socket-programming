@@ -16,7 +16,7 @@
 #define DEFAULT_STATIC_DIR "static"
 #define PORT "3333"
 #define BACKLOG 16
-#define MAX_CONTENT_LENGTH 4096
+#define MAX_CONTENT_LENGTH 8192
 #define MAXBUFSIZE (MAX_CONTENT_LENGTH << 1)
 #define MAXDATASIZE 256
 #define MAXFILENAME 64
@@ -117,6 +117,21 @@ int recv_all(const int sock_fd, char *buf)
         }
     }
     return len;
+}
+
+int send_all(const int sock_fd, void *msg, size_t len, int flags)
+{
+    int total = 0;
+    int byte_count = 0;
+    while (total < len) {
+        if ((byte_count = send(sock_fd, msg + total, len - total, flags)) == -1) {
+            perror("send");
+            return -1;
+        }
+        total += byte_count;
+    }
+
+    return total;
 }
 
 void *get_in_addr(struct sockaddr *sa)
@@ -291,11 +306,12 @@ int main(int argc, char **argv)
                 }
 
                 /* TODO: send all */
-                if ((byte_count = send(newsock_fd, (void *) msg, strlen(msg),
+                if ((byte_count = send_all(newsock_fd, (void *) msg, strlen(msg),
                                        0)) == -1) {
-                    perror("send");
                     exit(1);
                 }
+
+                printf("msg len: %lu, sent %d bytes\n", strlen(msg), byte_count);
             }
 
             close(newsock_fd);
